@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "create-react-app": "^5.0.0"
+  },
+  "name": "task-manager",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saikeshari/Task-Manager.git"
+  },
+  "author": "saikeshari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saikeshari/Task-Manager/issues"
+  },
+  "homepage": "https://github.com/saikeshari/Task-Manager#readme",
+  "description": ""
+}
