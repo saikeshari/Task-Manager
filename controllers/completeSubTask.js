@@ -25,7 +25,9 @@ export const completeSubTask = async (req, res) => {
 
     console.log(subTaskscomplete);
 
-    let checker = subTaskscomplete => subTaskscomplete.every(v => v === true);
+    let checker = subTaskscomplete.every(v => v === true);
+
+    console.log(checker);
 
     if(checker) {
         const updatedTask = await Task.findOneAndUpdate(
