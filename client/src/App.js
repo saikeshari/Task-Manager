@@ -65,7 +65,7 @@ function App() {
   const [checked, setChecked] = useState([1]);
 
   const getInProgTasks = () => {
-    axios.get(`http://${baseUrl}/api/task/inprogress`).then((res) => {
+    axios.get(`${baseUrl}/api/task/inprogress`).then((res) => {
       // console.log(res);
       setInprogressTasks(res.data);
       setInProgOpen(new Array(res.data.length).fill(false));
@@ -74,7 +74,7 @@ function App() {
   };
 
   const getCompTasks = () => {
-    axios.get(`http://${baseUrl}/api/task/completed`).then((res) => {
+    axios.get(`${baseUrl}/api/task/completed`).then((res) => {
       // console.log(res);
       setCompletedTasks(res.data);
       setCompOpen(new Array(res.data.length).fill(false));
@@ -83,7 +83,7 @@ function App() {
   };
 
   const getArchTasks = () => {
-    axios.get(`http://${baseUrl}/api/task/archived`).then((res) => {
+    axios.get(`${baseUrl}/api/task/archived`).then((res) => {
       // console.log(res);
       setArchivedTasks(res.data);
       setArchOpen(new Array(res.data.length).fill(false));
@@ -94,7 +94,7 @@ function App() {
   const addTask = (obj) => {
     setInprogLoad(false);
     axios
-      .post(`http://${baseUrl}/api/task`, {
+      .post(`${baseUrl}/api/task`, {
         title: newTaskTitle,
         description: newTaskDesc,
         subtasks: newTaskSubtasks,
@@ -110,7 +110,7 @@ function App() {
   const handleToggle = (temp) => () => {
     setInprogLoad(false);
     axios
-      .post(`http://${baseUrl}/api/complete`, {
+      .post(`${baseUrl}/api/complete`, {
         _id: temp._id,
         status: !temp.completed,
       })
