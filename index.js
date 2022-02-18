@@ -14,19 +14,16 @@ app.use(cors());
 // app.use(express.static("public"));
 connectDB();
 
-app.get('/', (req, res) => {
-    res.send("Hello to Task Manager API");
-});
-
-//server static files in production
-if(process.env.NODE_ENV === 'production')
-{
-    app.use(express.static('client/build'));
-
-    app.get('*',(req,res) => {
-        res.sendFile(ppath.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-}
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "client/build")));
+    app.get("*", (req,res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    );
+  } else {
+    app.get("/", function (req, res) {
+      res.send("Hello hi");
+    });
+  }
 
 app.use("/api/task", taskRoutes);
 app.use("/api/complete", completeRoutes);
