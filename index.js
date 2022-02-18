@@ -15,7 +15,10 @@ app.use(cors());
 // app.use(express.static("public"));
 connectDB();
 
- if (process.env.NODE_ENV === "production") {
+app.use("/api/task", taskRoutes);
+app.use("/api/complete", completeRoutes);
+
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join("client/build")));
     app.get("*", (req,res) =>
     res.sendFile(path.resolve("client", "build", "index.html"))
@@ -25,9 +28,6 @@ connectDB();
       res.send("Hello hi");
     });
   }
-
-app.use("/api/task", taskRoutes);
-app.use("/api/complete", completeRoutes);
 
 const PORT = process.env.PORT || 5000;
 
