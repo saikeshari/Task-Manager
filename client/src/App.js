@@ -20,6 +20,7 @@ import { ListItem, Checkbox, TextField } from "@mui/material";
 import axios from "axios";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import LinearProgress from "@mui/material/LinearProgress";
+import { baseUrl } from "./baseUrl";
 
 const tiers = [
   {
@@ -37,7 +38,6 @@ const tiers = [
 ];
 
 function App() {
-
   const inprogOpenChange = (i) => {
     // console.log(i);
     const newarr = inprogOpen.map((obj, index) => {
@@ -65,7 +65,7 @@ function App() {
   const [checked, setChecked] = useState([1]);
 
   const getInProgTasks = () => {
-    axios.get("http://localhost:5000/api/task/inprogress").then((res) => {
+    axios.get(`http://${baseUrl}/api/task/inprogress`).then((res) => {
       // console.log(res);
       setInprogressTasks(res.data);
       setInProgOpen(new Array(res.data.length).fill(false));
@@ -74,7 +74,7 @@ function App() {
   };
 
   const getCompTasks = () => {
-    axios.get("http://localhost:5000/api/task/completed").then((res) => {
+    axios.get(`http://${baseUrl}/api/task/completed`).then((res) => {
       // console.log(res);
       setCompletedTasks(res.data);
       setCompOpen(new Array(res.data.length).fill(false));
@@ -83,7 +83,7 @@ function App() {
   };
 
   const getArchTasks = () => {
-    axios.get("http://localhost:5000/api/task/archived").then((res) => {
+    axios.get(`http://${baseUrl}/api/task/archived`).then((res) => {
       // console.log(res);
       setArchivedTasks(res.data);
       setArchOpen(new Array(res.data.length).fill(false));
@@ -93,23 +93,24 @@ function App() {
 
   const addTask = (obj) => {
     setInprogLoad(false);
-    axios.post("http://localhost:5000/api/task", {
-      title:newTaskTitle,
-      description:newTaskDesc,
-      subtasks:newTaskSubtasks
-    })
-    .then((res) => {
-      setNewTaskDesc('')
-      setNewTaskSubtasks('')
-      setNewTaskTitle('')
-      getInProgTasks();
-    })
-  }
+    axios
+      .post(`http://${baseUrl}/api/task`, {
+        title: newTaskTitle,
+        description: newTaskDesc,
+        subtasks: newTaskSubtasks,
+      })
+      .then((res) => {
+        setNewTaskDesc("");
+        setNewTaskSubtasks("");
+        setNewTaskTitle("");
+        getInProgTasks();
+      });
+  };
 
   const handleToggle = (temp) => () => {
     setInprogLoad(false);
     axios
-      .post("http://localhost:5000/api/complete", {
+      .post(`http://${baseUrl}/api/complete`, {
         _id: temp._id,
         status: !temp.completed,
       })
@@ -135,9 +136,9 @@ function App() {
   const [compOpen, setCompOpen] = useState();
   const [archOpen, setArchOpen] = useState();
 
-  const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [newTaskDesc, setNewTaskDesc] = useState('');
-  const [newTaskSubtasks, setNewTaskSubtasks] = useState('');
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskDesc, setNewTaskDesc] = useState("");
+  const [newTaskSubtasks, setNewTaskSubtasks] = useState("");
 
   const handleChangeTitle = (event) => {
     setNewTaskTitle(event.target.value);

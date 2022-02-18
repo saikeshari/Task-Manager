@@ -1,0 +1,1 @@
+export const baseUrl = 'https://stark-garden-33063.herokuapp.com/';
