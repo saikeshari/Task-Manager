@@ -18,7 +18,15 @@ app.get('/', (req, res) => {
     res.send("Hello to Task Manager API");
 });
 
+//server static files in production
+if(process.env.NODE_ENV === 'production')
+{
+    app.use(express.static('client/build'));
 
+    app.get('*',(req,res) => {
+        res.sendFile(ppath.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 app.use("/api/task", taskRoutes);
 app.use("/api/complete", completeRoutes);
