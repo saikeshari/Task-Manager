@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import taskRoutes from './routes/tasks.js';
 import completeRoutes from './routes/complete.js';
+import path from "path";
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(cors());
 // app.use(express.static("public"));
 connectDB();
 
-if (process.env.NODE_ENV === "production") {
+ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "client/build")));
     app.get("*", (req,res) =>
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
